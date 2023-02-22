@@ -3,14 +3,11 @@ package com.example.demo.aspect
 import com.example.demo.annotation.GlobalLock
 import com.example.demo.lock.Lock.lockMap
 import org.aspectj.lang.ProceedingJoinPoint
-import org.aspectj.lang.annotation.After
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
-import org.aspectj.lang.annotation.Before
-import org.springframework.core.MethodParameter
 import org.springframework.stereotype.Component
-import java.util.UUID
 import java.lang.reflect.*
+import java.util.UUID
 
 @Aspect
 @Component
@@ -30,15 +27,10 @@ class GlobalLockAspect {
             lockMap[key] = UUID.randomUUID().toString() + time
             println("SET LOCK [$key] as [$time]")
             return pjt.proceed()
-
         } finally {
             val key = pjt.signature.toString()
             lockMap.remove(key)
             println("FREE LOCK [$key]")
-
         }
-
     }
 }
-
-
