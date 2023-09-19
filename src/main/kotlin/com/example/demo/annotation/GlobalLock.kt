@@ -7,4 +7,4 @@ import java.lang.annotation.Target
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-annotation class GlobalLock(val time: Int = 1000)
+annotation class GlobalLock
