@@ -1,7 +1,8 @@
 package com.example.demo.controller
 
 import com.example.demo.annotation.GlobalLock
-import com.example.demo.lock.Lock.lockMap
+import com.example.demo.annotation.RateLimit
+import com.example.demo.ratelimit.RateLimiter.rateLimiter
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -13,14 +14,14 @@ class DemoController {
         return "FINISH"
     }
 
-    @GlobalLock
+    @RateLimit(500)
     @GetMapping("/demo")
     fun getDemo(): Any? {
         return "DEMO"
     }
 
     @GetMapping("/in")
-    fun get(): Any?  {
-        return lockMap.entries
+    fun get(): Any? {
+        return rateLimiter.entries
     }
 }
