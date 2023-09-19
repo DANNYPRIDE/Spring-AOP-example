@@ -12,7 +12,6 @@ import java.util.UUID
 @Aspect
 @Component
 class GlobalLockAspect {
-    //
     @Around("@annotation(com.example.demo.annotation.GlobalLock)")
     fun setLock(pjt: ProceedingJoinPoint): Any? {
         try {
